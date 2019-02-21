@@ -25,15 +25,16 @@ struct PNM_t {
    /* Insérez ici les champs de la structure PNM */
 	char extension[4];
 	char nb_magique[3]; // P1, P2, P3
-	int nb_colognes;
-	int nb_lignes;
+	const int nb_colognes, nb_lignes;
+	const short nb_elements;
 	short val_max; // PGM : 255 ; PPM : < 65.536
+	int contenu[3][3][3];
 
 
 };
 
 int get_size_img(char nom_fichier[80]){
-	int taille = 0, colognes = 0, lignes = 0;
+	int taille = 0, colognes = 0, lignes = 0, fin_colognes = 0;
 	char type_f[3], caract;
 
 	if(nom_fichier == NULL){
@@ -46,12 +47,19 @@ int get_size_img(char nom_fichier[80]){
 		printf("Le fichier n'a pas pu etre ouvert.\n");
 		return -1;
 	}
-	for(; fscanf(fichier_open,"%c", &caract) != EOF;){
-		printf("%c\n", caract);
+	for(int i = 0; fscanf(fichier_open,"%c", &caract) != EOF; i++){
+		if(caract != '\n'){
+			printf("%c", caract);
+			printf("|_|");
+		}
+		if(caract == ' ' && fin_colognes == 0){
+			colognes++;
+		}
+
 		taille++;
 	}
+	printf("Colognes : %d\n", colognes);
 	// taille += colognes*lignes;
-	
 	fclose(fichier_open);
 
 	return taille;
