@@ -63,5 +63,21 @@ int load_pnm(PNM **image, char* filename);
  */
 int write_pnm(PNM *image, char* filename);
 
+/*
+* get_size_img
+* Donne la taille d'une image
+* @param nom_fichier est le nom de du fichier
+*
+* @pre: nom_fichier != NULL
+* @post: la fonction returne la taille du fichier
+*
+* @return:
+*		 0 nom_fichier == NULL
+*		-1 Le fichier n'a pas pu etre ouvert
+*		 la taile de l'image si l'opération a réussi
+*/
+
+int get_size_img(char nom_fichier[80]);
+
 #endif // __PNM__
 
