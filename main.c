@@ -22,7 +22,7 @@
 int main(int argc, char *argv[]) {
 	int taille = 0;
    char *optstring = "";
-   taille = get_size_img("my_image.pgm");
+   taille = get_size_img("hippocampe.pbm", "pbm");
    printf("Taille = %d\n", taille );
    /* Insérez le code ici */
 

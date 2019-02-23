@@ -67,8 +67,9 @@ int write_pnm(PNM *image, char* filename);
 * get_size_img
 * Donne la taille d'une image
 * @param nom_fichier est le nom de du fichier
+* @param type_fichier est le type de fichier: ppm, pbm ou pgm
 *
-* @pre: nom_fichier != NULL
+* @pre: nom_fichier != NULL && (type_fichier != NULL && type_ficier == 'ppm' || type_fichier == 'pbm' || type_fichier == 'pgm')
 * @post: la fonction returne la taille du fichier
 *
 * @return:
@@ -77,7 +78,24 @@ int write_pnm(PNM *image, char* filename);
 *		 la taile de l'image si l'opération a réussi
 */
 
-int get_size_img(char nom_fichier[80]);
+int get_size_img(char nom_fichier[80], char type_fichier[4]);
+
+/*
+* get_lignes_colognes
+* Donne le nombre de lignes et de colognes du fichier
+* @param nom_fichier est le nom de du fichier
+* @param type_fichier est le type de fichier: ppm, pbm ou pgm
+*
+* @pre: nom_fichier != NULL && (type_fichier != NULL && type_ficier == 'ppm' || type_fichier == 'pbm' || type_fichier == 'pgm')
+* @post: la fonction returne la taille du fichier
+*
+* @return:
+*		 0 nom_fichier == NULL
+*		-1 Le fichier n'a pas pu etre ouvert
+*		 la taile de l'image si l'opération a réussi
+*/
+
+void get_lignes_colognes(char nom_fichier[80], char type_fichier[4], int *lignes, int *colognes)
 
 #endif // __PNM__
 
