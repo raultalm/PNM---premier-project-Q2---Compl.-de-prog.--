@@ -20,6 +20,18 @@
  * Déclaration du type opaque PNM
  *
  */
+// typedef struct PNM_t {
+
+//    /* Insérez ici les champs de la structure PNM */
+// 	char extension[4];
+// 	char nb_magique[3]; // P1, P2, P3
+// 	int nb_colognes, nb_lignes;
+// 	short nb_elements;
+// 	short val_max; // PGM : 255 ; PPM : < 65.536
+// 	int *contenu;
+
+
+// }PNM;
 typedef struct PNM_t PNM;
 
 
@@ -81,13 +93,18 @@ int write_pnm(PNM *image, char* filename);
 int get_size_img(char nom_fichier[80], char type_fichier[4]);
 
 /*
-* get_lignes_colognes
-* Donne le nombre de lignes et de colognes du fichier
+* get_en_tete
+* Charge l'en tete du fichier dans lequel on va stoquer l'image, avec l'en tete du fichier image de base
 * @param nom_fichier est le nom de du fichier
 * @param type_fichier est le type de fichier: ppm, pbm ou pgm
+* @param nb_magique est l'adresse de la variable dans laquelle on veut stoquer le nombre magique
+* @param lignes est l'adresse de la variable dans laquelle on veut stoquer le nombre de lignes de 'limage'
+* @param colognes est l'adresse de la variable dans laquelle on veut stoquer le nombre de colognes de l'image
+* @param val_max est l'adresse de la variable dans laquelle on veut stoquer la valeur maximale que peut avoir un pixel
 *
 * @pre: nom_fichier != NULL && (type_fichier != NULL && type_ficier == 'ppm' || type_fichier == 'pbm' || type_fichier == 'pgm')
-* @post: la fonction returne la taille du fichier
+		&& nb_magique != NULL && lignes != NULL && colognes != NULL && val_max != NULL
+* @post: PNM.nb_magique = nb_magique && PNM.lignes = lignes && PNM.colognes = colognes && PNM.vam_max = val_max
 *
 * @return:
 *		 0 nom_fichier == NULL
@@ -95,7 +112,10 @@ int get_size_img(char nom_fichier[80], char type_fichier[4]);
 *		 la taile de l'image si l'opération a réussi
 */
 
-void get_lignes_colognes(char nom_fichier[80], char type_fichier[4], int *lignes, int *colognes)
+int get_en_tete(char nom_fichier[80], char type_fichier[4], PNM *pnm);
+
+
+int test_me();
 
 #endif // __PNM__
 
